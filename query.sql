@@ -7,3 +7,9 @@ WHERE YEAR(`date_of_birth`) = 1990;
 SELECT *
 FROM `courses`
 WHERE `cfu`>10;
+
+-- Selezionare tutti gli studenti che hanno più di 30 anni
+SELECT * 
+FROM `students`
+WHERE `date_of_birth` <= "1993-03-01"
+ORDER BY `date_of_birth` DESC;
