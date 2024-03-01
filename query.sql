@@ -39,3 +39,8 @@ FROM `departments`;
 SELECT COUNT(id) as num_insegnanti_senza_telefono
 FROM `teachers`
 WHERE `phone` IS NULL;
+
+-- Contare quanti iscritti ci sono stati ogni anno
+SELECT COUNT(id) as num_iscritti, YEAR(`enrolment_date`) as anno
+FROM `students`
+GROUP BY anno;
