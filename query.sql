@@ -49,3 +49,14 @@ GROUP BY anno;
 SELECT COUNT(id) as num_uffici, `office_address` as indirizzo_ufficio
 FROM `teachers`
 GROUP BY indirizzo_ufficio;
+
+-- Calcolare la media dei voti di ogni appello d'esame
+-- inclusi voti insufficienti 
+select ROUND(AVG(`vote`)) as media_voti, exam_id as id_esame
+FROM `exam_student`
+GROUP BY id_esame;
+-- solo voti sufficienti
+select ROUND(AVG(`vote`)) as media_voti, exam_id as id_esame
+FROM `exam_student`
+WHERE `vote` >= 18
+GROUP BY id_esame;
