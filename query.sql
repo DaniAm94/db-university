@@ -60,3 +60,8 @@ select ROUND(AVG(`vote`)) as media_voti, exam_id as id_esame
 FROM `exam_student`
 WHERE `vote` >= 18
 GROUP BY id_esame;
+
+-- Contare quanti corsi di laurea ci sono per ogni dipartimento
+SELECT COUNT(id) as num_corsi_di_laurea, department_id as id_dipartimento
+FROM `degrees`
+GROUP BY id_dipartimento;
