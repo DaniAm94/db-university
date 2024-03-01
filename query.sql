@@ -34,3 +34,8 @@ WHERE `level` = "magistrale";
 -- Da quanti dipartimenti è composta l'università? (12)
 SELECT COUNT(id) as num_dipartimenti
 FROM `departments`;
+
+-- Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
+SELECT COUNT(id) as num_insegnanti_senza_telefono
+FROM `teachers`
+WHERE `phone` IS NULL;
