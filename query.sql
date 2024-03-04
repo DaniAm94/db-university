@@ -32,36 +32,50 @@ FROM `degrees`
 WHERE `level` = "magistrale";
 
 -- Da quanti dipartimenti è composta l'università? (12)
-SELECT COUNT(id) as num_dipartimenti
+SELECT COUNT(`id`) as `num_dipartimenti`
 FROM `departments`;
 
 -- Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
-SELECT COUNT(id) as num_insegnanti_senza_telefono
+SELECT COUNT(`id`) as `num_insegnanti_senza_telefono`
 FROM `teachers`
 WHERE `phone` IS NULL;
 
 -- Contare quanti iscritti ci sono stati ogni anno
-SELECT COUNT(id) as num_iscritti, YEAR(`enrolment_date`) as anno
+SELECT COUNT(`id`) as `num_iscritti`, YEAR(`enrolment_date`) as `anno`
 FROM `students`
-GROUP BY anno;
+GROUP BY `anno`;
 
 -- Contare gli insegnanti che hanno l'ufficio nello stesso edificio
-SELECT COUNT(id) as num_uffici, `office_address` as indirizzo_ufficio
+SELECT COUNT(`id`) as `num_uffici`, `office_address` as `indirizzo_ufficio`
 FROM `teachers`
-GROUP BY indirizzo_ufficio;
+GROUP BY `indirizzo_ufficio`;
 
 -- Calcolare la media dei voti di ogni appello d'esame
 -- inclusi voti insufficienti 
-select ROUND(AVG(`vote`)) as media_voti, exam_id as id_esame
+select ROUND(AVG(`vote`)) as `media_voti`, `exam_id` as `id_esame`
 FROM `exam_student`
-GROUP BY id_esame;
+GROUP BY `id_esame`;
 -- solo voti sufficienti
-select ROUND(AVG(`vote`)) as media_voti, exam_id as id_esame
+select ROUND(AVG(`vote`)) as `media_voti`, `exam_id` as `id_esame`
 FROM `exam_student`
 WHERE `vote` >= 18
-GROUP BY id_esame;
+GROUP BY `id_esame`;
 
 -- Contare quanti corsi di laurea ci sono per ogni dipartimento
-SELECT COUNT(id) as num_corsi_di_laurea, department_id as id_dipartimento
+SELECT COUNT(`id`) as `num_corsi_di_laurea`, `department_id` as `id_dipartimento`
 FROM `degrees`
-GROUP BY id_dipartimento;
+GROUP BY `id_dipartimento`;
+
+-- Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
+SELECT S.* , `D`.`name` AS 'nome corso di laurea'
+FROM `students` AS S
+JOIN `degrees` AS D
+ON `S`.`degree_id` = `D`.`id`
+WHERE `D`.`name` = 'Corso di Laurea in Economia';
+
+-- Selezionare tutti i Corsi di Laurea del Dipartimento di Neuroscienze
+SELECT `DEG`.`name` AS 'Corsi di laurea del Dipartimento di Neuroscienze'
+FROM `degrees` AS DEG
+JOIN `departments` AS DEP
+ON `DEG`.`department_id` = `DEP`.`id`
+WHERE `DEP`.`name` = 'Dipartimento di Neuroscienze';
