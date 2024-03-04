@@ -121,3 +121,14 @@ ON `DEG`.`id` = `C`.`degree_id`
 JOIN `departments` AS DEP
 ON `DEP`.`id` = `DEG`.`department_id`
 WHERE `DEP`.`name` = 'Dipartimento di Matematica';
+
+-- BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per superare ciascuno dei suoi esami
+SELECT `S`.`registration_number` AS `matricola`, `S`.`name` AS 'nome studente', `S`.`surname` AS 'cognome studente', `C`.`name` AS 'nome materia', COUNT(ES.vote) AS 'tentativi'
+FROM `students` AS S
+JOIN `exam_student` AS ES
+ON `S`.`id` = `ES`.`student_id`
+JOIN `exams` AS E
+ON `E`.`id` = `ES`.`exam_id`
+JOIN `courses` AS C
+ON `C`.`id` = `E`.`course_id`
+GROUP BY `S`.`id`, `C`.`name`;
