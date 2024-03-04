@@ -89,3 +89,12 @@ JOIN `teachers` AS T
 ON T.`id` = `CT`.`teacher_id`
 WHERE `T`.`surname` = 'Amato'
 AND `T`.`name` = 'Fulvio';
+
+-- Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
+SELECT `S`.`registration_number` AS 'matricola', `S`.`surname` as `cognome_studente`, `S`.`name` AS `nome_studente`, `DEG`.`name` AS 'corso_di_laurea', `DEP`.`name` AS 'nome_dipartimento'
+FROM `students` as S
+JOIN `degrees` AS DEG
+ON `S`.`degree_id` = `DEG`.`id`
+JOIN `departments` AS DEP
+ON `DEG`.`department_id` = `DEP`.`id`
+ORDER BY `cognome_studente`, `nome_studente`;
